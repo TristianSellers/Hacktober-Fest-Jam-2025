@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hacktoberfest Jam 2025 • Student Showcase</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#0f172a; color:#e2e8f0; }
+    header { padding: 28px 20px; text-align:center; background: linear-gradient(135deg, #1e293b, #0f172a); border-bottom:1px solid #334155; }
+    h1 { margin: 0 0 8px; font-size: clamp(22px, 4vw, 36px); }
+    p.sub { margin: 0; opacity: .8; }
+    main { max-width: 1100px; margin: 24px auto; padding: 0 16px 80px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card { background:#111827; border:1px solid #334155; border-radius: 14px; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.25); }
+    .card h3 { margin: 0 0 6px; font-size: 18px; color:#fff; }
+    .card p { margin: 0; font-size: 14px; opacity:.9; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+    a.btn { display:inline-block; padding:8px 12px; border-radius:10px; border:1px solid #334155; text-decoration:none; color:#e2e8f0; }
+    a.btn:hover { background:#0b1220; }
+    footer { text-align:center; opacity:.7; font-size:13px; padding: 24px 0; }
+    .empty { text-align:center; padding: 40px 16px; opacity:.8; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hacktoberfest Jam 2025 — Student Showcase</h1>
+    <p class="sub">Profiles and contributions from participants</p>
+  </header>
+  <main>
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty" style="display:none">No cards yet. Be the first! Follow the tasks in <code>/showcase</code> and open a PR.</div>
+  </main>
+  <footer>Made with ❤️ by the community</footer>
+
+  <script>
+    // Config — adjust if you rename things
+    const owner = "TristianSellers";
+    const repo  = "Hacktober-Fest-Jam-2025";
+    const path  = "showcase/cards";
+
+    async function listCards() {
+      const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      const res = await fetch(api, { headers: { "Accept": "application/vnd.github+json" }});
+      if (!res.ok) throw new Error("Failed to load cards list");
+      return res.json();
+    }
+
+    function toTitle(filename) {
+      // "username.md" -> "username"
+      return filename.replace(/\.md$/i, "");
+    }
+
+    async function init() {
+      const grid = document.getElementById("grid");
+      const empty = document.getElementById("empty");
+      try {
+        const files = await listCards();
+        const mdFiles = files.filter(f => f.name.toLowerCase().endsWith(".md"));
+        if (mdFiles.length === 0) { empty.style.display = "block"; return; }
+
+        mdFiles.forEach(f => {
+          const username = toTitle(f.name);
+          const raw = f.download_url; // raw markdown url
+          const gh = `https://github.com/${owner}/${repo}/blob/main/${path}/${encodeURIComponent(f.name)}`;
+
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <h3>@${username}</h3>
+            <p>Showcase card</p>
+            <div class="row">
+              <a class="btn" href="${gh}" target="_blank" rel="noopener">View on GitHub</a>
+              <a class="btn" href="${raw}" target="_blank" rel="noopener">Raw Markdown</a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        empty.style.display = "block";
+        empty.textContent = "Could not load cards. Try again later.";
+        console.error(e);
+      }
+    }
+    init();
+  </script>
+</body>
+</html>
