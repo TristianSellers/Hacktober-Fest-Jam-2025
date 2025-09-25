@@ -20,5 +20,8 @@
 - (+5) End-of-week demo or short write-up
 
 ### Award Categories
-- Best First PR • Most Helpful Contributor • Best Team Collaboration  
-- Most Creative Contribution • Documentation Champion
+- Best First PR
+- Most Helpful Contributor
+- Best Team Collaboration  
+- Most Creative Contribution
+- Documentation Champion
