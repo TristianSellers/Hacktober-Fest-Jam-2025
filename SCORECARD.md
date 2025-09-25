@@ -17,7 +17,7 @@
 
 ## 4) Participation & Presentation (10)
 - (+5) At least one valid PR submitted
-- (+5) End-of-week demo or short write-up
+- (+5) End-of-event demo or short write-up
 
 ### Award Categories
 - Best First PR
