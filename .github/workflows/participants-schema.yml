@@ -8,7 +8,7 @@ on:
       - ".github/workflows/participants-schema.yml"
 
 jobs:
-  validate:
+  check:
     # This job name is what you will add as a required check in the ruleset:
     # "participants-schema / validate"
     runs-on: ubuntu-latest
