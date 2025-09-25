@@ -9,3 +9,4 @@ MD029: false   # ordered list item numbering
 MD022: false   # blank lines around headings
 MD032: false   # blank lines around lists
 MD031: false   # blank lines around fenced code blocks
+MD012: false   # allow multiple consecutive blank lines
