@@ -9,26 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Find JSON files to validate
-        id: files
-        run: |
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          git ls-files '*.json'
-          echo "EOF" >> $GITHUB_OUTPUT
-
       - name: Validate JSON
-        if: steps.files.outputs.files != ''
         run: |
-          set -e
-          echo "${{ steps.files.outputs.files }}" | while read -r f; do
-            [ -z "$f" ] && continue
-            echo "Validating $f"
-            python - <<'PY'
-import json, sys
-for path in sys.stdin.read().splitlines():
-    if not path.strip(): 
-        continue
-    with open(path, 'r', encoding='utf-8') as fh:
-        json.load(fh)
-PY
+          for file in $(git ls-files '*.json'); do
+            echo "Checking $file"
+            python -m json.tool $file > /dev/null
           done
