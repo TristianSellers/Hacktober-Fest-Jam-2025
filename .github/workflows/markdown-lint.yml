@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  mdl:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
