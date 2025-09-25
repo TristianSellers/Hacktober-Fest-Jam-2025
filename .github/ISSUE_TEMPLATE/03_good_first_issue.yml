@@ -1,0 +1,13 @@
+name: Good first issue
+description: Beginner-friendly task
+labels: ["good first issue", "documentation"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task
+      description: Clear, step-by-step instructions
+  - type: input
+    id: expected_result
+    attributes:
+      label: Expected Result (file/line added)
