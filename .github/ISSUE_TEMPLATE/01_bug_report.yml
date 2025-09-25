@@ -1,0 +1,21 @@
+name: Bug report
+description: Report a problem to help us improve
+labels: ["bug"]
+body:
+  - type: input
+    id: area
+    attributes:
+      label: Area
+      description: Which folder/file?
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
