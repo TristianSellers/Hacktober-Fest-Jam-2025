@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Participant",
+  "type": "object",
+  "required": ["name", "github", "interests", "first_pr_goal"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Student's display name"
+    },
+    "github": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,39}$",
+      "description": "GitHub username (no @)"
+    },
+    "interests": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "At least one interest"
+    },
+    "first_pr_goal": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short sentence describing their first PR goal"
+    }
+  }
+}
