@@ -1,6 +1,6 @@
 # Hacktoberfest Jam 2025
 
-Welcome! This repo is the home base for our week-long Hacktoberfest Jam.  
+Welcome! This repo is the home base for our month-long Hacktoberfest Jam.  
 🎯 Goal: learn Git/GitHub, make your first (or next) open source contribution, and collaborate.
 
 ## How this works
