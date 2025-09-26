@@ -1,0 +1,3 @@
+- [First Contributions](https://firstcontributions.github.io/)
+  - A step-by-step guide to making your first contribution on GitHub.  
+  - Helpful because it walks beginners through the PR process with clear visuals.
