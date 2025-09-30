@@ -1,5 +1,7 @@
 # Hackathon Scoring (Total 100 pts)
 
+The CS Club will use this or something similar to this to judge your presentation at the end of Hacktober Fest (10/30)!
+
 ## 1) Contribution Quality (40)
 - (+10) Clear, meaningful commit messages
 - (+10) Useful PR description (context, screenshots if relevant)
