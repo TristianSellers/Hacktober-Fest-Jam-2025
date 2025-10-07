@@ -6,26 +6,35 @@
   <title>Student Showcase • Hacktoberfest Jam 2025</title>
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background:#0f172a; color:#e2e8f0; }
-    header { padding: 28px 20px; text-align:center; background: linear-gradient(135deg, #1e293b, #0f172a); border-bottom:1px solid #334155; }
+    header { padding: 28px 20px 16px; text-align:center; background: linear-gradient(135deg, #1e293b, #0f172a); border-bottom:1px solid #334155; }
     h1 { margin: 0 0 8px; font-size: clamp(22px, 4vw, 36px); }
-    p.sub { margin: 0; opacity: .8; }
+    p.sub { margin: 0 0 14px; opacity: .8; }
+    .nav { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin: 0 auto 6px; }
+    a.btn { display:inline-block; padding:8px 12px; border-radius:10px; border:1px solid #334155; text-decoration:none; color:#e2e8f0; }
+    a.btn:hover { background:#0b1220; }
+    .btn-accent { border-color:#8e44ad; }
     main { max-width: 1100px; margin: 24px auto; padding: 0 16px 80px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
     .card { background:#111827; border:1px solid #334155; border-radius: 14px; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.25); }
     .card h3 { margin: 0 0 6px; font-size: 18px; color:#fff; }
     .card p { margin: 0; font-size: 14px; opacity:.9; }
     .row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
-    a.btn { display:inline-block; padding:8px 12px; border-radius:10px; border:1px solid #334155; text-decoration:none; color:#e2e8f0; }
-    a.btn:hover { background:#0b1220; }
     footer { text-align:center; opacity:.7; font-size:13px; padding: 24px 0; }
     .empty { text-align:center; padding: 40px 16px; opacity:.8; }
   </style>
 </head>
 <body>
   <header>
-    <!-- Removed redundant big title -->
     <p class="sub">Student Showcase — Contributions from participants</p>
+    <nav class="nav" aria-label="Site navigation">
+      <a class="btn" href="https://github.com/TristianSellers/Hacktober-Fest-Jam-2025" target="_blank" rel="noopener">📘 README</a>
+      <a class="btn" href="https://github.com/TristianSellers/Hacktober-Fest-Jam-2025/issues" target="_blank" rel="noopener">🐙 Issues</a>
+      <a class="btn" href="https://github.com/TristianSellers/Hacktober-Fest-Jam-2025/discussions" target="_blank" rel="noopener">💬 Discussions</a>
+      <a class="btn btn-accent" href="https://github.com/TristianSellers/Hacktober-Fest-Jam-2025/tree/main/challenges/tech-or-treat" target="_blank" rel="noopener">🎭 Tech or Treat</a>
+      <a class="btn btn-accent" href="https://github.com/TristianSellers/Hacktober-Fest-Jam-2025/issues?q=label%3A%22challenge%3A+tech-or-treat%22" target="_blank" rel="noopener">📝 Submit Trick</a>
+    </nav>
   </header>
+
   <main>
     <div id="grid" class="grid" aria-live="polite"></div>
     <div id="empty" class="empty" style="display:none">No cards yet. Be the first! Follow the tasks in <code>/showcase</code> and open a PR.</div>
@@ -33,6 +42,7 @@
   <footer>Made with ❤️ by the community</footer>
 
   <script>
+    // Config — adjust if you rename things
     const owner = "TristianSellers";
     const repo  = "Hacktober-Fest-Jam-2025";
     const path  = "showcase/cards";
