@@ -1,4 +1,4 @@
-# Task 05 — Tech or Treat (Optional Challenge)
+# Task 03 — Tech or Treat (Optional Challenge)
 
 Build a “playful deception” project and submit it to `challenges/tech-or-treat/`.
 
