@@ -1,0 +1,27 @@
+name: tech-or-treat-validate
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "challenges/tech-or-treat/**"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate each submission folder
+        run: |
+          set -e
+          ROOT="challenges/tech-or-treat"
+          [ -d "$ROOT" ] || exit 0
+          # For each subfolder (one project)
+          for d in $(find "$ROOT" -mindepth 1 -maxdepth 1 -type d); do
+            echo "Checking $d"
+            test -f "$d/README.md"
+            test -f "$d/LICENSE"
+            # Demo can be gif or mp4 or md link mentioned in README
+            if ! ls "$d"/demo.* 1>/dev/null 2>&1; then
+              echo "Note: $d has no demo file; ensure README links a demo."
+            fi
+          done
