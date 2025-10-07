@@ -16,6 +16,7 @@ Welcome! This repo is the home base for our month-long Hacktoberfest Jam.
 - 🌍 [Make Your First External PR](./tasks/03_first_external_pr.md)
 - 👥 [Team Project](./tasks/04_team_project.md)
 - 🧭 [Finding Beginner Issues](./resources/finding-issues.md)
+- 🏆 [Judging Criteria](./JUDGING.md)
 - 🎭 [Tech or Treat Challenge](./challenges/tech-or-treat/README.md)
 
 ## Community
