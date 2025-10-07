@@ -17,6 +17,7 @@ Welcome! This repo is the home base for our month-long Hacktoberfest Jam.
 - 👥 [Team Project](./tasks/04_team_project.md)
 - 🧭 [Finding Beginner Issues](./resources/finding-issues.md)
 - 🏆 [Scoring & Rubric](./SCORECARD.md)
+- 🎭 [Tech or Treat Challenge](./challenges/tech-or-treat/README.md)
 
 ## Community
 - Please read our [Code of Conduct](./CODE_OF_CONDUCT.md).
