@@ -1,0 +1,35 @@
+name: Tech or Treat submission
+description: Submit your project for the Trick or Tech challenge
+labels: ["challenge: tech-or-treat", "showcase"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Project title
+      placeholder: e.g., "Shy Buttons"
+  - type: input
+    id: slug
+    attributes:
+      label: Folder path
+      placeholder: challenges/tech-or-treat/shy-buttons
+  - type: textarea
+    id: concept
+    attributes:
+      label: Concept (what's the trick?)
+  - type: input
+    id: demo
+    attributes:
+      label: Demo link or file
+      placeholder: demo.gif or demo.mp4 path, or external link
+  - type: textarea
+    id: howto
+    attributes:
+      label: How to run/test
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Added README.md, LICENSE, and demo
+        - label: Explained the trick and ensured it's respectful (Code of Conduct)
+        - label: Opened a PR titled "Tech or Treat: <project name>"
