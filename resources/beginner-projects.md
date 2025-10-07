@@ -1,5 +1,6 @@
 # Beginner-Friendly Projects
 
+- DigitalOceans' HacktoberFest - https://hacktoberfest.com/
 - firstcontributions/first-contributions — practice the PR flow
 - EddieHubCommunity — mentorship-focused issues
 - public-apis/public-apis — add/fix API entries
