@@ -9,12 +9,19 @@ on:
 
 jobs:
   check:
-    # This job name is what you will add as a required check in the ruleset:
-    # "participants-schema / validate"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout base (main) for schema
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          path: base
+
+      - name: Checkout PR head for changed files
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -27,8 +34,8 @@ jobs:
       - name: Validate participants JSON files
         run: |
           set -e
-          SCHEMA="schemas/participant.schema.json"
-          CHANGED=$(git ls-files showcase/participants/*.json || true)
+          SCHEMA="base/schemas/participant.schema.json"
+          CHANGED=$(ls pr/showcase/participants/*.json 2>/dev/null || true)
           if [ -z "$CHANGED" ]; then
             echo "No participant JSON files to validate."
             exit 0
