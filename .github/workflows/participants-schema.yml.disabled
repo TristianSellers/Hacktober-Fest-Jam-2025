@@ -1,35 +1,20 @@
-# Updated Oct 9 - cleaned YAML
 name: participants-schema
-
 on:
-  pull_request_target:
+  pull_request:
     branches: [ main ]
     paths:
       - "showcase/participants/*.json"
       - "schemas/participant.schema.json"
       - ".github/workflows/participants-schema.yml"
 
-permissions:
-  contents: read
-
 jobs:
   check:
+    # This job name is what you will add as a required check in the ruleset:
+    # "participants-schema / validate"
     runs-on: ubuntu-latest
     steps:
-      # 1) Base repo (main) — for the schema (always your latest)
-      - name: Checkout base (main) for schema
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.base.ref }}
-          path: base
-
-      # 2) PR head — for the participant files (the contributor’s changes)
-      - name: Checkout PR head for changed files
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-          path: pr
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -39,22 +24,15 @@ jobs:
       - name: Install ajv-cli
         run: npm install -g ajv-cli@5
 
-      - name: Validate participants JSON files (using base schema)
-        shell: bash
+      - name: Validate participants JSON files
         run: |
           set -e
-          SCHEMA="base/schemas/participant.schema.json"
-
-          echo "----- Schema header (debug) -----"
-          head -n 3 "$SCHEMA" || true
-          echo "---------------------------------"
-
-          CHANGED=$(ls pr/showcase/participants/*.json 2>/dev/null || true)
+          SCHEMA="schemas/participant.schema.json"
+          CHANGED=$(git ls-files showcase/participants/*.json || true)
           if [ -z "$CHANGED" ]; then
             echo "No participant JSON files to validate."
             exit 0
           fi
-
           for f in $CHANGED; do
             echo "Validating $f"
             ajv validate -s "$SCHEMA" -d "$f" --errors=text
