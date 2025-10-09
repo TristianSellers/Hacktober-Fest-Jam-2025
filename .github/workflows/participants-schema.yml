@@ -1,4 +1,5 @@
 name: participants-schema
+
 on:
   pull_request_target:
     branches: [ main ]
@@ -7,19 +8,53 @@ on:
       - "schemas/participant.schema.json"
       - ".github/workflows/participants-schema.yml"
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      # 1) Base repo (main) — for the schema
+      # 1) Base repo (main) — for the schema (always your latest)
       - name: Checkout base (main) for schema
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           path: base
 
-      # 2) PR head — for the participant files
+      # 2) PR head — for the participant files (the contributor’s changes)
       - name: Checkout PR head for changed files
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.f_
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli@5
+
+      - name: Validate participants JSON files (using base schema)
+        shell: bash
+        run: |
+          set -e
+          SCHEMA="base/schemas/participant.schema.json"
+
+          echo "----- Schema header (debug) -----"
+          head -n 3 "$SCHEMA" || true
+          echo "---------------------------------"
+
+          CHANGED=$(ls pr/showcase/participants/*.json 2>/dev/null || true)
+          if [ -z "$CHANGED" ]; then
+            echo "No participant JSON files to validate."
+            exit 0
+          fi
+
+          for f in $CHANGED; do
+            echo "Validating $f"
+            ajv validate -s "$SCHEMA" -d "$f" --errors=text
+          done
